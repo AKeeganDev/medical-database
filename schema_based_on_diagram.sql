@@ -45,3 +45,15 @@ CREATE TABLE invoice_items (
 CREATE UNIQUE INDEX invoice-items_id_index ON invoice_items(id);
 
 CREATE UNIQUE INDEX invoice-items_treatment_id_index ON treatments(id);
+
+/*join*/
+CREATE TABLE medical_histories_treatments (
+  id SERIAL PRIMARY KEY,
+  medical_history_id INT REFERENCES medical_histories(id),
+  treatment_id int REFERENCES treatments(id),
+  patient_id REFERENCES patients(id)
+);
+
+CREATE INDEX index_medical_history_id ON medical_histories_treatments(medical_history_id);
+CREATE INDEX index_treatment_id ON medical_histories_treatments(treatment_id);
+CREATE INDEX index_patient_id on medical_histories_treatments(patient_id);
